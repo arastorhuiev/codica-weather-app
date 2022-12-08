@@ -3,6 +3,7 @@ import { useAppSelector } from '../store/hooks';
 
 export function CityCard() {
   const cityData = useAppSelector((state) => state.weatherCity.data);
+  const dataStatus = useAppSelector((state) => state.weatherCity.status);
 
   return (
     cityData && (
@@ -12,9 +13,8 @@ export function CityCard() {
           height: 300,
           backgroundColor: 'primary.dark',
           borderRadius: 10,
-          opacity: 0.9,
           '&:hover': {
-            opacity: 0.8,
+            opacity: 0.9,
           },
         }}>
         <Grid
