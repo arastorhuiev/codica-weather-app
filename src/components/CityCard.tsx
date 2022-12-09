@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { nanoid } from 'nanoid';
 import { useMemo } from 'react';
 import { useAppSelector } from '../store/hooks';
@@ -13,8 +13,9 @@ export function CityCard() {
         <Box
           key={nanoid()}
           sx={{
-            width: 300,
+            width: 360,
             height: 300,
+            margin: 1,
             backgroundColor: 'primary.dark',
             borderRadius: 10,
             '&:hover': {
@@ -48,5 +49,9 @@ export function CityCard() {
     }
   };
 
-  return <Grid>{renderData()}</Grid>;
+  return (
+    <Grid container justifyContent='space-between'>
+      {renderData()}
+    </Grid>
+  );
 }
