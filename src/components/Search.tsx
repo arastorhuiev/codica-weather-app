@@ -1,7 +1,7 @@
-import { Box, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from '../store/hooks';
 import { fetchWeatherByCityName } from '../store/weatherSlice';
+import { Box, TextField } from '@mui/material';
 
 export function Search() {
   const [currentCity, setCurrentCity] = useState<string>('');

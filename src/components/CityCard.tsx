@@ -1,7 +1,9 @@
-import { Box, Grid, Typography } from '@mui/material';
-import { nanoid } from 'nanoid';
 import { useMemo } from 'react';
+
 import { useAppSelector } from '../store/hooks';
+import { nanoid } from 'nanoid';
+
+import { Box, Grid, Typography } from '@mui/material';
 
 export function CityCard() {
   const citiesData = useAppSelector((state) => state.weatherCity.data);

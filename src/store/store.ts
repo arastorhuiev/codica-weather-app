@@ -1,5 +1,4 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { weatherReducer } from './weatherSlice';
 import {
   persistStore,
   persistReducer,
@@ -11,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { weatherReducer } from './weatherSlice';
 
 const rootReducer = combineReducers({
   weatherCity: weatherReducer,
