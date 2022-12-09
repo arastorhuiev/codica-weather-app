@@ -12,9 +12,10 @@ export function Search() {
     setCurrentCity(event.target.value);
   };
 
-  const dispatchByEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const fetchByEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       dispatch(fetchWeatherByCityName(currentCity));
+      setCurrentCity('');
     }
   };
 
@@ -24,7 +25,7 @@ export function Search() {
         label='Enter city name'
         value={currentCity}
         onChange={handleChangeByValue}
-        onKeyPress={dispatchByEnterKey}
+        onKeyPress={fetchByEnterKey}
         variant='standard'
         fullWidth
       />
