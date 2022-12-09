@@ -6,7 +6,7 @@ export enum Status {
 
 export type WeatherState = {
   status: Status;
-  data: IWeather | null;
+  data: IWeather[];
 };
 
 export interface Coord {

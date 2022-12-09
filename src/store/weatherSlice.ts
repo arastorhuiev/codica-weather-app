@@ -15,7 +15,7 @@ export const fetchWeatherByCityName = createAsyncThunk(
 
 const initialState: WeatherState = {
   status: Status.LOADING,
-  data: null,
+  data: [],
 };
 
 const weatherSlice = createSlice({
@@ -23,21 +23,19 @@ const weatherSlice = createSlice({
   initialState,
   reducers: {
     setData(state, action) {
-      state.data = action.payload;
+      state.data.push(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWeatherByCityName.pending, (state) => {
       state.status = Status.LOADING;
-      state.data = null;
     });
     builder.addCase(fetchWeatherByCityName.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.data.push(action.payload);
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchWeatherByCityName.rejected, (state) => {
       state.status = Status.ERROR;
-      state.data = null;
     });
   },
 });
