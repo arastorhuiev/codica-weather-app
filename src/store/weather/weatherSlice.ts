@@ -41,17 +41,17 @@ const weatherSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWeatherByCityName.pending, (state) => {
-      state.status = Status.LOADING;
+      //state.status = Status.LOADING;
     });
     builder.addCase(fetchWeatherByCityName.fulfilled, (state, action) => {
       state.data.push(action.payload);
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchWeatherByCityName.rejected, (state) => {
-      state.status = Status.ERROR;
+      //state.status = Status.ERROR;
     });
     builder.addCase(reloadDataByCityName.pending, (state) => {
-      state.status = Status.LOADING;
+      //state.status = Status.LOADING;
     });
     builder.addCase(reloadDataByCityName.fulfilled, (state, action) => {
       const cityName = action.payload.name;
@@ -62,7 +62,7 @@ const weatherSlice = createSlice({
       state.statusReloadedCity = Status.SUCCESS;
     });
     builder.addCase(reloadDataByCityName.rejected, (state) => {
-      state.status = Status.ERROR;
+      //state.status = Status.ERROR;
     });
   },
 });

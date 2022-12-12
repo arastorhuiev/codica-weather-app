@@ -10,8 +10,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { forecastReducer } from './forecast/forecastSlice';
+
 import { weatherReducer } from './weather/weatherSlice';
+import { forecastReducer } from './forecast/forecastSlice';
 
 const rootReducer = combineReducers({
   weatherCity: weatherReducer,

@@ -7,6 +7,8 @@ import {
   removeDataByCityId,
 } from '../store/weather/weatherSlice';
 
+import { Link } from 'react-router-dom';
+
 import { IWeather } from '../store/weather/types';
 
 import { Box, Button, Grid, Typography } from '@mui/material';
@@ -74,12 +76,11 @@ export const CityCard: FC<CityCardProps> = ({ cityData }) => {
           onClick={() => handleRemoveCityById(cityData.id)}>
           Delete
         </Button>
-        <Button
-          variant='contained'
-          color='success'
-          onClick={() => console.log(123)}>
-          Weather per hour
-        </Button>
+        <Link to={`/forecast/${cityData.name}`}>
+          <Button variant='contained' color='success'>
+            Weather per hour
+          </Button>
+        </Link>
       </Grid>
     </Box>
   );

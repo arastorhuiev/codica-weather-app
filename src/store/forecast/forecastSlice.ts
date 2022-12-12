@@ -33,6 +33,7 @@ const forecastSlice = createSlice({
     });
     builder.addCase(fetchForecastByCityName.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
+      state.data = action.payload;
     });
     builder.addCase(fetchForecastByCityName.rejected, (state) => {
       state.status = Status.ERROR;

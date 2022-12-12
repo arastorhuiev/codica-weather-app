@@ -3,7 +3,7 @@ import { Status } from "../types";
 // forecast
 export type ForecastState = {
   status: Status;
-  data: {} | null;
+  data: IForecast | null;
 };
 
 export interface Main {
