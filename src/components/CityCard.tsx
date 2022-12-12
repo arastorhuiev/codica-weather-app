@@ -5,9 +5,9 @@ import { useAppDispatch } from '../store/hooks';
 import {
   reloadDataByCityName,
   removeDataByCityId,
-} from '../store/weatherSlice';
+} from '../store/weather/weatherSlice';
 
-import { IWeather } from '../store/types';
+import { IWeather } from '../store/weather/types';
 
 import { Box, Button, Grid, Typography } from '@mui/material';
 
@@ -62,20 +62,24 @@ export const CityCard: FC<CityCardProps> = ({ cityData }) => {
         <Typography variant='body2'>
           Speed wind: {cityData.wind.speed}
         </Typography>
-        <Grid>
-          <Button
-            variant='contained'
-            color='success'
-            onClick={() => handleClickByCityName(cityData.name)}>
-            Reload
-          </Button>
-          <Button
-            variant='contained'
-            color='success'
-            onClick={() => handleRemoveCityById(cityData.id)}>
-            Delete
-          </Button>
-        </Grid>
+        <Button
+          variant='contained'
+          color='success'
+          onClick={() => handleClickByCityName(cityData.name)}>
+          Reload
+        </Button>
+        <Button
+          variant='contained'
+          color='success'
+          onClick={() => handleRemoveCityById(cityData.id)}>
+          Delete
+        </Button>
+        <Button
+          variant='contained'
+          color='success'
+          onClick={() => console.log(123)}>
+          Weather per hour
+        </Button>
       </Grid>
     </Box>
   );

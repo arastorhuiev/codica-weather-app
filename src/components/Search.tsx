@@ -1,8 +1,6 @@
 import { useState } from 'react';
-
 import { useAppDispatch } from '../store/hooks';
-import { fetchWeatherByCityName } from '../store/weatherSlice';
-
+import { fetchWeatherByCityName } from '../store/weather/weatherSlice';
 import { Box, TextField } from '@mui/material';
 
 export function Search() {

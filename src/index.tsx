@@ -8,7 +8,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from './store/store';
 import { store } from './store';
 
-import { ThemeProvider } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
+
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from './mui';
 
 const root = ReactDOM.createRoot(
@@ -19,9 +21,12 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

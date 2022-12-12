@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { Status, WeatherState } from './types';
+import { Status } from '../types';
+import { WeatherState } from './types';
 
 const baseFetchDataByCityName = async (city: string) => {
   const response = await axios.get(
@@ -13,7 +14,7 @@ const baseFetchDataByCityName = async (city: string) => {
 };
 
 export const fetchWeatherByCityName = createAsyncThunk(
-  'weather/fetchWeatherByLatLng',
+  'weather/fetchWeatherCityName',
   baseFetchDataByCityName,
 );
 
