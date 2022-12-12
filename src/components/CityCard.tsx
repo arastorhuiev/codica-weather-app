@@ -1,14 +1,25 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { FC } from 'react';
+import { useAppDispatch } from '../store/hooks';
 import { IWeather } from '../store/types';
+import {
+  reloadDataByCityName,
+  removeDataByCityId,
+} from '../store/weatherSlice';
 
 type CityCardProps = {
   cityData: IWeather;
 };
 
 export const CityCard: FC<CityCardProps> = ({ cityData }) => {
+  const dispatch = useAppDispatch();
+
   const handleClickByCityName = (city: string): void => {
-    console.log('hi');
+    dispatch(reloadDataByCityName(city));
+  };
+
+  const handleRemoveCityById = (id: number): void => {
+    dispatch(removeDataByCityId(id));
   };
 
   return (
@@ -27,27 +38,36 @@ export const CityCard: FC<CityCardProps> = ({ cityData }) => {
         container
         direction='column'
         justifyContent='center'
-        alignItems='center'>
+        alignItems='center'
+        padding={2}>
         <Typography variant='body2'>{cityData.name}</Typography>
         <Typography variant='body2'>{cityData.weather[0].main}</Typography>
         <Typography variant='body2'>
           {cityData.weather[0].description}
         </Typography>
-        <Typography variant='body2'>temp: {cityData.main.temp}</Typography>
         <Typography variant='body2'>
-          pressure: {cityData.main.pressure}
+          Temperature: {cityData.main.temp}
         </Typography>
         <Typography variant='body2'>
-          humidity: {cityData.main.humidity}
+          Pressure: {cityData.main.pressure}
         </Typography>
         <Typography variant='body2'>
-          speed wind: {cityData.wind.speed}
+          Humidity: {cityData.main.humidity}
+        </Typography>
+        <Typography variant='body2'>
+          Speed wind: {cityData.wind.speed}
         </Typography>
         <Button
           variant='contained'
           color='success'
           onClick={() => handleClickByCityName(cityData.name)}>
           Reload
+        </Button>
+        <Button
+          variant='contained'
+          color='success'
+          onClick={() => handleRemoveCityById(cityData.id)}>
+          Delete
         </Button>
       </Grid>
     </Box>

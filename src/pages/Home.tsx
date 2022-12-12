@@ -3,6 +3,7 @@ import { Search } from '../components/Search';
 import { Container, Grid, Stack } from '@mui/material';
 import { useAppSelector } from '../store/hooks';
 import { useMemo } from 'react';
+import { nanoid } from 'nanoid';
 
 export function Home() {
   const citiesData = useAppSelector((state) => state.weatherCity.data);
@@ -11,7 +12,7 @@ export function Home() {
   const dataCompleted = useMemo(
     () =>
       citiesData.map((cityData) => (
-        <CityCard key={cityData.id} cityData={cityData} />
+        <CityCard key={nanoid()} cityData={cityData} />
       )),
     [citiesData],
   );

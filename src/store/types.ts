@@ -6,6 +6,7 @@ export enum Status {
 
 export type WeatherState = {
   status: Status;
+  statusReloadedCity: Status | null;
   data: IWeather[];
 };
 
@@ -48,7 +49,7 @@ export interface Sys {
   sunset: number;
 }
 
-export interface IWeather{
+export interface IWeather {
   coord: Coord;
   weather: Weather[];
   base: string;

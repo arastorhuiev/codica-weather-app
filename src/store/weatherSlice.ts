@@ -22,6 +22,7 @@ export const reloadDataByCityName = createAsyncThunk(
 
 const initialState: WeatherState = {
   status: Status.LOADING,
+  statusReloadedCity: null,
   data: [],
 };
 
@@ -29,8 +30,10 @@ const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    setData(state, action) {
-      state.data.push(action.payload);
+    removeDataByCityId(state, action) {
+      const cityId = action.payload;
+      const filtered = state.data.filter((item) => item.id !== cityId);
+      state.data = filtered;
     },
   },
   extraReducers: (builder) => {
@@ -44,16 +47,17 @@ const weatherSlice = createSlice({
     builder.addCase(fetchWeatherByCityName.rejected, (state) => {
       state.status = Status.ERROR;
     });
-    
+
     builder.addCase(reloadDataByCityName.pending, (state) => {
-      //state.status = Status.LOADING;
+      state.status = Status.LOADING;
     });
     builder.addCase(reloadDataByCityName.fulfilled, (state, action) => {
       const cityName = action.payload.name;
-
-      state.data.findIndex((item) => item.name === cityName);
-      console.log('YEAH');
-      
+      const cityData = action.payload;
+      const cityIndex = state.data.findIndex((item) => item.name === cityName);
+      state.data.splice(cityIndex, 1, cityData);
+      state.status = Status.SUCCESS;
+      state.statusReloadedCity = Status.SUCCESS;
     });
     builder.addCase(reloadDataByCityName.rejected, (state) => {
       state.status = Status.ERROR;
@@ -61,5 +65,5 @@ const weatherSlice = createSlice({
   },
 });
 
-export const { setData } = weatherSlice.actions;
+export const { removeDataByCityId } = weatherSlice.actions;
 export const weatherReducer = weatherSlice.reducer;
