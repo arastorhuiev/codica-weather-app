@@ -1,19 +1,22 @@
 import { useMemo } from 'react';
 
 import { useAppSelector } from '../store/hooks';
-import { nanoid } from 'nanoid';
 
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 
 export function CityCard() {
   const citiesData = useAppSelector((state) => state.weatherCity.data);
   const dataStatus = useAppSelector((state) => state.weatherCity.status);
 
+  const handleClickByCityName = (city: string): void => {
+    console.log('hi');
+  };
+
   const dataCompleted = useMemo(
     () =>
       citiesData.map((cityData) => (
         <Box
-          key={nanoid()}
+          key={cityData.id}
           sx={{
             width: 360,
             height: 300,
@@ -30,7 +33,26 @@ export function CityCard() {
             justifyContent='center'
             alignItems='center'>
             <Typography variant='body2'>{cityData.name}</Typography>
-            <Typography variant='body2'>{cityData.main.temp}</Typography>
+            <Typography variant='body2'>{cityData.weather[0].main}</Typography>
+            <Typography variant='body2'>
+              {cityData.weather[0].description}
+            </Typography>
+            <Typography variant='body2'>temp: {cityData.main.temp}</Typography>
+            <Typography variant='body2'>
+              pressure: {cityData.main.pressure}
+            </Typography>
+            <Typography variant='body2'>
+              humidity: {cityData.main.humidity}
+            </Typography>
+            <Typography variant='body2'>
+              speed wind: {cityData.wind.speed}
+            </Typography>
+            <Button
+              variant='contained'
+              color='success'
+              onClick={() => handleClickByCityName(cityData.name)}>
+              Reload
+            </Button>
           </Grid>
         </Box>
       )),
@@ -52,7 +74,7 @@ export function CityCard() {
   };
 
   return (
-    <Grid container justifyContent='space-between'>
+    <Grid container justifyContent='center'>
       {renderData()}
     </Grid>
   );
