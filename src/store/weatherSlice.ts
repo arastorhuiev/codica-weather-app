@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { Status, WeatherState } from './types';
 
 const baseFetchDataByCityName = async (city: string) => {
@@ -47,7 +49,6 @@ const weatherSlice = createSlice({
     builder.addCase(fetchWeatherByCityName.rejected, (state) => {
       state.status = Status.ERROR;
     });
-
     builder.addCase(reloadDataByCityName.pending, (state) => {
       state.status = Status.LOADING;
     });
