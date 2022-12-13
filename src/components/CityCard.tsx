@@ -32,26 +32,23 @@ export const CityCard: FC<CityCardProps> = ({ cityData }) => {
     <Box
       sx={{
         width: 360,
-        height: 300,
+        height: 200,
         margin: 1,
         backgroundColor: 'primary.dark',
         borderRadius: 10,
         '&:hover': {
           opacity: 0.9,
         },
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}>
-      <Grid
-        container
-        direction='column'
-        justifyContent='center'
-        alignItems='center'>
+      <Box>
         <Typography variant='body2'>
-          {cityData.name} - {cityData.weather[0].main}
+          {cityData.name} - {cityData.weather[0].main} (
+          {cityData.weather[0].description})
         </Typography>
-        {/* <Typography variant='body2'>{cityData.weather[0].main}</Typography> */}
-        {/* <Typography variant='body2'>
-          {cityData.weather[0].description}
-        </Typography> */}
         <Typography variant='body2'>
           Temperature: {cityData.main.temp}
         </Typography>
@@ -64,24 +61,37 @@ export const CityCard: FC<CityCardProps> = ({ cityData }) => {
         <Typography variant='body2'>
           Speed wind: {cityData.wind.speed}
         </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          width: 350,
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          p: 2,
+        }}>
         <Button
           variant='contained'
-          color='success'
+          color='secondary'
           onClick={() => handleClickByCityName(cityData.name)}>
           Reload
         </Button>
+        <Link
+          style={{ textDecoration: 'none' }}
+          to={`/forecast/${cityData.name}`}>
+          <Button variant='contained' color='secondary'>
+            Forecast
+          </Button>
+        </Link>
         <Button
           variant='contained'
-          color='success'
+          color='error'
           onClick={() => handleRemoveCityById(cityData.id)}>
           Delete
         </Button>
-        <Link to={`/forecast/${cityData.name}`}>
-          <Button variant='contained' color='success'>
-            Weather per hour
-          </Button>
-        </Link>
-      </Grid>
+      </Box>
     </Box>
   );
 };
