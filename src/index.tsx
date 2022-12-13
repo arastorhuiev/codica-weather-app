@@ -8,7 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from './store/store';
 import { store } from './store';
 
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from './mui';
@@ -21,12 +21,12 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <HashRouter>
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <App />
           </ThemeProvider>
-        </BrowserRouter>
+        </HashRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>,
