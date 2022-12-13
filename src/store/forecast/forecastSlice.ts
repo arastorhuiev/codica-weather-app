@@ -1,16 +1,25 @@
-import axios from 'axios';
-
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { Status } from '../types';
 import { ForecastState } from './types';
 
-const baseFetchForecastByCityName = async (city: string) => {
-  const response = await axios.get(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`,
-  );
+const baseFetchForecastByCityName = async function (city: string) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`,
+    );
 
-  return response.data;
+    if (!response.ok) {
+      throw new Error('Server Error');
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    let result = (error as Error).message;
+    return result;
+  }
 };
 
 export const fetchForecastByCityName = createAsyncThunk(

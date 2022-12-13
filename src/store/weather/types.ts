@@ -1,4 +1,4 @@
-import { Status } from "../types";
+import { Status } from '../types';
 
 export type WeatherState = {
   status: Status;
@@ -30,7 +30,7 @@ export interface Main {
 export interface Wind {
   speed: number;
   deg: number;
-  gust: number;
+  gust?: number;
 }
 
 export interface Clouds {

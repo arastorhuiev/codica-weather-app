@@ -23,6 +23,7 @@ export function Search() {
     <Box>
       <TextField
         label='Enter city name'
+        role='textfield'
         value={currentCity}
         onChange={handleChangeByValue}
         onKeyPress={fetchByEnterKey}

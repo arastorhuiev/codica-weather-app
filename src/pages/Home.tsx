@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import { useAppSelector } from '../store/hooks';
-import { nanoid } from 'nanoid';
 
 import { Search } from '../components/Search';
 import { CityCard } from '../components/CityCard';
@@ -14,7 +13,7 @@ export function Home() {
   const dataCompleted = useMemo(
     () =>
       citiesData.map((cityData) => (
-        <CityCard key={nanoid()} cityData={cityData} />
+        <CityCard key={cityData.id} cityData={cityData} />
       )),
     [citiesData],
   );
