@@ -13,18 +13,18 @@ export function Home() {
   const dataCompleted = useMemo(
     () =>
       citiesData.map((cityData) => (
-        <CityCard key={cityData.id} cityData={cityData} />
+        <CityCard key={cityData.id * Math.random()} cityData={cityData} />
       )),
     [citiesData],
   );
 
   const renderData = () => {
     if (dataStatus === 'loading') {
-      return <></>;
+      return <>loading</>;
     }
 
     if (dataStatus === 'error') {
-      return <></>;
+      return <>error</>;
     }
 
     if (dataStatus === 'completed') {

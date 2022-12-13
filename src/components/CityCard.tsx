@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 import { IWeather } from '../store/weather/types';
 
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 type CityCardProps = {
   cityData: IWeather;

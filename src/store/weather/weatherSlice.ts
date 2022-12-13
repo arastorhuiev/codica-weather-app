@@ -4,26 +4,17 @@ import { Status } from '../types';
 import { WeatherState } from './types';
 
 const baseFetchDataByCityName = async function (city: string) {
-  try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`,
-    );
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`,
+  );
 
-    if (!response.ok) {
-      throw new Error('Server Error');
-    }
+  const data = await response.json();
 
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    let result = (error as Error).message;
-    return result;
-  }
+  return data;
 };
 
 export const fetchWeatherByCityName = createAsyncThunk(
-  'weather/fetchWeatherCityName',
+  'weather/fetchWeatherByCityName',
   baseFetchDataByCityName,
 );
 
@@ -50,17 +41,21 @@ const weatherSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWeatherByCityName.pending, (state) => {
-      //state.status = Status.LOADING;
+      state.status = Status.LOADING;
     });
     builder.addCase(fetchWeatherByCityName.fulfilled, (state, action) => {
-      state.data.push(action.payload);
+      if (action.payload.cod === 200) {
+        state.data.push(action.payload);
+        state.status = Status.SUCCESS;
+      }
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchWeatherByCityName.rejected, (state) => {
-      //state.status = Status.ERROR;
+      
+      state.status = Status.ERROR;
     });
     builder.addCase(reloadDataByCityName.pending, (state) => {
-      //state.status = Status.LOADING;
+      state.status = Status.LOADING;
     });
     builder.addCase(reloadDataByCityName.fulfilled, (state, action) => {
       const cityName = action.payload.name;
@@ -71,7 +66,7 @@ const weatherSlice = createSlice({
       state.statusReloadedCity = Status.SUCCESS;
     });
     builder.addCase(reloadDataByCityName.rejected, (state) => {
-      //state.status = Status.ERROR;
+      state.status = Status.ERROR;
     });
   },
 });
