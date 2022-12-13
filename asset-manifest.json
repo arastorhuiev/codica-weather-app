@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/codica-weather-app/static/js/main.6a565a90.js",
+    "main.js": "/codica-weather-app/static/js/main.dd17b2ea.js",
     "index.html": "/codica-weather-app/index.html",
-    "main.6a565a90.js.map": "/codica-weather-app/static/js/main.6a565a90.js.map"
+    "main.dd17b2ea.js.map": "/codica-weather-app/static/js/main.dd17b2ea.js.map"
   },
   "entrypoints": [
-    "static/js/main.6a565a90.js"
+    "static/js/main.dd17b2ea.js"
   ]
 }
