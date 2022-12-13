@@ -2,63 +2,53 @@ import { FC } from 'react';
 
 import { List } from '../store/forecast/types';
 
-import { BarChart, Bar, XAxis, YAxis } from 'recharts';
-
-const data = [
-  {
-    temperature: 25,
-    time: -5,
-  },
-  {
-    temperature: 9,
-    time: -10,
-  },
-  {
-    temperature: 6,
-    time: -30,
-  },
-  {
-    temperature: 3,
-    time: 20,
-  },
-  {
-    temperature: 10,
-    time: 25,
-  },
-  {
-    temperature: 2,
-    time: 15,
-  },
-  {
-    temperature: 10,
-    time: 14,
-  },
-];
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  AreaChart,
+  Area,
+} from 'recharts';
 
 type ForecastBarProps = {
   forecastData: List[];
 };
 
 export const ForecastBar: FC<ForecastBarProps> = ({ forecastData }) => {
-  const temperature = forecastData.map((item) => item.main.temp);
-  const time = forecastData.map((item) => new Date(item.dt_txt).getHours());
+  const temperature = forecastData.map((item) => Math.round(item.main.temp));
+  const time = forecastData.map((item) =>
+    new Date(item.dt_txt).toLocaleString(),
+  );
+
+  const data = temperature.map((value, index) => {
+    return {
+      temperature: value,
+      time: time[index],
+    };
+  });
 
   return (
-    <>
-      <BarChart
-        width={800}
-        height={500}
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}>
-        <XAxis dataKey='temperature' />
-        <YAxis />
-        <Bar dataKey='time' barSize={100} fill='#8884d8' />
-      </BarChart>
-    </>
+    <AreaChart
+      width={1000}
+      height={400}
+      data={data}
+      margin={{
+        top: 10,
+        right: 30,
+        left: 0,
+        bottom: 0,
+      }}>
+      <CartesianGrid strokeDasharray='3 3' />
+      <XAxis dataKey='time' />
+      <YAxis />
+      <Tooltip />
+      <Area
+        type='basis'
+        dataKey='temperature'
+        stroke='#BDB76B'
+        fill='#F0E68C'
+      />
+    </AreaChart>
   );
 };
